@@ -1,0 +1,2 @@
+# LinkedTech
+ Worked about texnologi
