@@ -35,7 +35,19 @@ let topslider = new Swiper(".brandssliderrr", {
   },
 });
 
-// Для медленого скрола напишу на native javascript поже
+function ibg() {
+  let ibg = document.querySelectorAll(".ibg");
+  for (var i = 0; i < ibg.length; i++) {
+    if (ibg[i].querySelector("img")) {
+      ibg[i].style.backgroundImage =
+        "url(" + ibg[i].querySelector("img").getAttribute("src") + ")";
+    }
+  }
+}
+
+ibg();
+
+//! Для медленого скрола напишу на native javascript поже
 $(document).ready(function () {
   $(".header-top__a").click(function (e) {
     e.preventDefault();
@@ -52,51 +64,46 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
-  $(".popularproduct__addmorea").click(function (e) {
-    e.preventDefault();
-    $(".hideblock").addClass("active");
-    $(this).remove();
-  });
+let popularproduct = document.querySelector(".popularproduct__addmorea");
+popularproduct.addEventListener("click", function popularProduct(event) {
+  event.preventDefault();
+  popularproduct.remove();
+  document.querySelector(".hideblock").classList.add("active");
 });
 
-$(document).ready(function () {
-  $(".popularproduct__tabsa").click(function (e) {
-    e.preventDefault();
-    $(".popularproduct__tabsa").removeClass("active");
-    $(".popularproduct__tabscontent").removeClass("active");
-
-    $(this).addClass("active");
-    $($(this).attr("href")).addClass("active");
+let populartabs = document.querySelectorAll(".popularproduct__tabsa");
+let tabsconten = document.querySelectorAll(".popularproduct__tabscontent");
+populartabs.forEach(function tabs(item) {
+  item.addEventListener("click", function popularTabs(event) {
+    event.preventDefault();
+    let id = event.target.getAttribute("href");
+    populartabs.forEach((item2) => {
+      item2.classList.remove("active");
+    });
+    tabsconten.forEach((item2) => {
+      item2.classList.remove("active");
+    });
+    document.querySelector(id).classList.add("active");
+    item.classList.toggle("active");
   });
-  $(".popularproduct__tabsa:first").click();
+  document.querySelector(".popularproduct__tabsa").click();
 });
-$(document).ready(function () {
-  $(".burger-menu").click(function (event) {
-    $(".burger-menu,.header-top__nav").toggleClass("active");
-    $("body").toggleClass("lock");
+// burger menu
+
+let burgermenu = document.querySelector(".burger-menu");
+burgermenu.addEventListener("click", function burgerMenu(event) {
+  burgermenu.classList.toggle("active");
+  document.querySelector(".header-top__nav").classList.toggle("active");
+  document.getElementsByTagName("body")[0].classList.toggle("lock");
+});
+
+let headertop = document.querySelectorAll(".header-top__a");
+
+headertop.forEach((item) => {
+  item.addEventListener("click", function headerTop(event) {
+    event.preventDefault();
+    burgermenu.classList.remove("active");
+    document.querySelector(".header-top__nav").classList.remove("active");
   });
 });
-
-$(document).ready(function () {
-  $(".header-top__a").click(function (e) {
-    e.preventDefault();
-    $(".burger-menu,.header-top__nav").removeClass("active");
-  });
-});
-
-
-
-function ibg() {
-  let ibg = document.querySelectorAll(".ibg");
-  for (var i = 0; i < ibg.length; i++) {
-    if (ibg[i].querySelector("img")) {
-      ibg[i].style.backgroundImage =
-        "url(" + ibg[i].querySelector("img").getAttribute("src") + ")";
-    }
-  }
-}
-
-ibg();
-
 // Вспливающее меню  при клике
