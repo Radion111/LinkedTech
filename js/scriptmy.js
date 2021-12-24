@@ -47,23 +47,6 @@ function ibg() {
 
 ibg();
 
-//! Для медленого скрола напишу на native javascript поже
-$(document).ready(function () {
-  $(".header-top__a").click(function (e) {
-    e.preventDefault();
-    $("html,body").animate(
-      {
-        scrollTop: $($(this).attr("href")).offset().top + "px",
-      },
-      {
-        duration: 1000,
-        easing: "linear",
-      }
-    );
-    return false;
-  });
-});
-
 let popularproduct = document.querySelector(".popularproduct__addmorea");
 popularproduct.addEventListener("click", function popularProduct(event) {
   event.preventDefault();
@@ -107,3 +90,18 @@ headertop.forEach((item) => {
   });
 });
 // Вспливающее меню  при клике
+
+//! Для медленого скрола напишу на native javascript поже
+
+let scroll = document.querySelectorAll(".header-top__a");
+
+scroll.forEach((item) => {
+  item.addEventListener("click", function Scrollinto(event) {
+    event.preventDefault();
+    let id = item.getAttribute("href");
+    document.querySelector(id).scrollIntoView({
+      block: "center",
+      behavior: "smooth",
+    });
+  });
+});
